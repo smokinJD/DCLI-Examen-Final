@@ -1,7 +1,35 @@
-
 var miAplicacion = angular.module('miAplicacion', []);
 
 miAplicacion.controller('mainController', ["$scope", "$http", function($scope, $http) {
+        //////////Login/////////////
+         $scope.verLogin = "true";
+        $scope.tipoUsuario = " ";
+        $scope.usuario = {
+            user:"",
+            password:""
+        };
+        alert($scope.tipoUsuario);
+        $scope.login = function (){
+        $http.post('controladores/controladorLogin.php', {username:$scope.usuario.user, password:$scope.usuario.password}).success(function(data) {
+                if (typeof(data.usuario) === "undefined"){
+                    alert(data);
+                }else{
+                    alert("Acierto");
+                    $scope.tipoUsuario = data.rolmota;
+                    $scope.verBotones = "true";
+                    $scope.verLogin = "false";
+                    
+                    if ($scope.tipoUsuario === "administrador"){
+                        $scope.verOpciones = "true";
+                    };
+                }
+             })
+        .error(function(data) {
+            console.log('Error: ' + data);
+        });
+    };
+        
+        ////////////////////////////
         $http.get('controladores/IKASLEAKbilatu.php').success(function(data) {
             $scope.ikasle = data;
         });
@@ -16,7 +44,7 @@ miAplicacion.controller('mainController', ["$scope", "$http", function($scope, $
                 idBorrar:""
             };
         
-        $scope.verBotones = "true";
+        //$scope.verBotones = "true";
         
         //////////////////////////////////////////////////////////////////////
         ///Cogemos los datos de los alumnos de la Base de Datos 

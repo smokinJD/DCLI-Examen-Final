@@ -16,6 +16,20 @@
     </head>
     <body>
         <div  ng-controller="mainController"> 
+        <!-- *********************************   ZONA Login   *********************************************** -->
+        <div class="account-wall" ng-show="verLogin==='true'">
+		<form class="form-signin" ng-submit="login()">
+			<div class="form-group has-feedback">
+			<input ng-model="usuario.user" class="form-control" type="text" name="email" placeholder="Usuario" required autofocus email/>
+			<i class="glyphicon glyphicon-user form-control-feedback"></i>
+			</div>
+			<div class="form-group has-feedback">
+		    	<input ng-model="usuario.password" class="form-control" type="password" name="pass" placeholder="Contraseña" required />
+		    	<i class="glyphicon glyphicon-asterisk form-control-feedback"></i>
+		    	</div>
+			<button class="btn btn-lg btn-info btn-block" type="submit">ACCEDER</button>
+		</form>
+            </div>
  <!-- *********************************   ZONA MENU   *********************************************** -->
            
  <div id="superiorMenu" ng-show="verBotones==='true'" >
@@ -52,8 +66,8 @@
                     <li>{{item.ciclo}}</li>
                     <li>{{item.curso}}</li>
                 </ul>
-                <input type="button" value="IKASLE BERRIA" ng-click="iniciarAgregar()"/>
-                <input type="button" value="IKASLEA EZABATU" ng-click="iniciarBorrar()"/>
+                <input type="button" value="IKASLE BERRIA" ng-click="iniciarAgregar()" ng-show="verOpciones==='true'"/>
+                <input type="button" value="IKASLEA EZABATU" ng-click="iniciarBorrar()" ng-show="verOpciones==='true'"/>
             </div>
     <!-- *********************************   ZONA AGREGAR ALUMNO   *********************************************** -->
 
